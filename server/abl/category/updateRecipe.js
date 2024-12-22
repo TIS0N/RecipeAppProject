@@ -1,8 +1,11 @@
+// Import AJV for input validation
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
+// Imponrt category DAO to interact with data storage
 const categoryDao = require("../../dao/category-dao.js");
 
+// Define the schema for validating incoming data when updating a recipe
 const schema = {
   type: "object",
   properties: {
@@ -18,14 +21,20 @@ const schema = {
   additionalProperties: false,
 };
 
-async function UpdateAbl(req, res) {
+// Function to handle updating a recipe
+async function UpdateRecipe(req, res) {
   try {
     let category = req.body;
 
-    // validate input
+    // Set to false by default if not changed
+    if(category.favourite === undefined){
+        category.favourite = false;
+    }
+
+    // Validate the input data againts the schema
     const valid = ajv.validate(schema, category);
     if (!valid) {
-      res.status(400).json({
+        res.status(400).json({
         code: "dtoInIsNotValid",
         category: "dtoIn is not valid",
         validationError: ajv.errors,
@@ -33,31 +42,34 @@ async function UpdateAbl(req, res) {
       return;
     }
 
-    // update category in persistent storage
+    // Update the recipe in the storage
     let updatedCategory;
     try {
-      updatedCategory = categoryDao.update(category);
+        // Calling the update method from DAO
+        updatedCategory = categoryDao.update(category);
     } catch (e) {
-      res.status(400).json({
-        ...e,
+        res.status(400).json({
+        ...e,// Return any errors that occur during the update process
       });
-      return;
+        return;
     }
+
+    // If no category was updated (example: the recipe doesn't exist), return 404 Error message
     if (!updatedCategory) {
-      res.status(404).json({
+        res.status(404).json({
         code: "categoryNotFound",
         category: `Category with id ${category.id} not found`,
       });
-      return;
+        return;
     }
 
-    // return properly filled dtoOut
     // Return properly filled dtoOut and a successful response
-    res.status(200).json({ message: "Recipe created successfully.", updatedCategory});
-    //res.json(updatedCategory);
+    res.status(200).json({ message: "Recipe updated successfully.", updatedCategory});
   } catch (e) {
+    // 500 Server Error
     res.status(500).json({ category: e.category });
   }
 }
 
-module.exports = UpdateAbl;
+// Export the function for use in routes
+module.exports = UpdateRecipe;
