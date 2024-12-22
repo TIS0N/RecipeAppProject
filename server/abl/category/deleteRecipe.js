@@ -1,8 +1,11 @@
+// Importing AJV for schema validation
 const Ajv = require("ajv");
 const ajv = new Ajv();
-const categoryDao = require("../../dao/category-dao.js");
-//const transactionDao = require("../../dao/transaction-dao.js");
 
+//Import category DAO for data storage
+const categoryDao = require("../../dao/category-dao.js");
+
+// Define the schema for input validation where ID is required
 const schema = {
   type: "object",
   properties: {
@@ -12,11 +15,12 @@ const schema = {
   additionalProperties: false,
 };
 
-async function DeleteAbl(req, res) {
+// Function to handle recipe deletion
+async function DeleteRecipe(req, res) {
   try {
     const reqParams = req.body;
 
-    // validate input
+    // Validate input against schema
     const valid = ajv.validate(schema, reqParams);
     if (!valid) {
       res.status(400).json({
@@ -27,8 +31,9 @@ async function DeleteAbl(req, res) {
       return;
     }
 
-    // Check if the recipe exists
-    const recipe = await categoryDao.get(reqParams.id); // Assuming categoryDao.get retrieves a recipe by id
+    // Check if the recipe exists by its ID
+    const recipe = await categoryDao.get(reqParams.id);
+
     if (!recipe) {
       res.status(404).json({
         code: "recipeNotFound",
@@ -37,16 +42,15 @@ async function DeleteAbl(req, res) {
       return;
     }
     
-    // remove transaction from persistant storage
+    // Remove the recipe from persistant storage
     categoryDao.remove(reqParams.id);
 
-    // return properly filled dtoOut
-    //res.json({});
-    // Return a successful response
+    // Return properly filled dtoOut and a successful response
     res.status(200).json({ message: "Recipe deleted successfully." });
   } catch (e) {
+    // 500 Server Error
     res.status(500).json({ category: e.category });
   }
 }
-
-module.exports = DeleteAbl;
+// Export the function for use in routes
+module.exports = DeleteRecipe;

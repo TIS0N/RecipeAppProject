@@ -1,8 +1,11 @@
+// Import AJV for schema validation
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
+// Imponrt category DAO for data storage
 const categoryDao = require("../../dao/category-dao.js");
 
+// Defined schema for recipe validation
 const schema = {
   type: "object",
   properties: {
@@ -17,15 +20,17 @@ const schema = {
   additionalProperties: false,
 };
 
-async function CreateAbl(req, res) {
+// Function to handle recipe creation 
+async function CreateRecipe(req, res) {
   try {
     let category = req.body;
 
+    // Setting favourite to false by default if not provided
     if(category.favourite === undefined){
         category.favourite = false;
     }
 
-    // validate input
+    // Validate the input data against the schema
     const valid = ajv.validate(schema, category);
     if (!valid) {
       res.status(400).json({
@@ -36,7 +41,7 @@ async function CreateAbl(req, res) {
       return;
     }
 
-    // store category to a persistant storage
+    // SAvong the category to a persistent storage
     try {
       category = categoryDao.create(category);
     } catch (e) {
@@ -46,13 +51,13 @@ async function CreateAbl(req, res) {
       return;
     }
 
-    // return properly filled dtoOut
-    // Return a successful response
+    // return properly filled dtoOut and a successful response
     res.status(201).json({ message: "Recipe created successfully.", category});
-    //res.json(category);
   } catch (e) {
+    // Server Error
     res.status(500).json({ category: e.category });
   }
 }
 
-module.exports = CreateAbl;
+// Exporting function for use in routes
+module.exports = CreateRecipe;
