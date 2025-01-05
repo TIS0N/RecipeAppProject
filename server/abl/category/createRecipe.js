@@ -10,19 +10,33 @@ const schema = {
   type: "object",
   properties: {
     name: { type: "string" },
-    ingredients: {type: "string"},
-    instructions: {type: "string"},
-    rating: {type: "number"},
-    foodCategory: {type: "string"},
-    favourite: {type: "boolean"},
+    ingredients: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          ingredientName: { type: "string" },
+          value: { type: "number" },
+          unit: { type: "string", enum: ["g", "ml", "amount"] },
+        },
+        required: ["ingredientName", "value", "unit"],
+        additionalProperties: false,
+      },
+    },
+    instructions: { type: "string" },
+    rating: { type: "number" },
+    foodCategory: { type: "string" },
+    favourite: { type: "boolean", default: false},
   },
-  required: ["name"],
+  required: ["name", "ingredients"],
   additionalProperties: false,
 };
+
 
 // Function to handle recipe creation 
 async function CreateRecipe(req, res) {
   try {
+    console.log("Incoming request body:", req.body);
     let category = req.body;
 
     // Setting favourite to false by default if not provided
