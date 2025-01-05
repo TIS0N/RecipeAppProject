@@ -1,0 +1,229 @@
+.App {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.App-header {
+  background-color: #7B904B;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*================================================================*/
+
+.App{
+  background-color: #7B904B;
+  min-height: 100vh;
+  color: white;
+  padding: 30px;
+}
+
+.button #createRecipe{
+  padding: 20px 50px;
+  background-color: #DFC35D;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+#createRecipe:hover{
+  background-color: #ebd37b;
+}
+
+.button #recipeList{
+  padding: 20px 50px;
+  background-color: #B8A693;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+#recipeList:hover{
+  color: black;
+  background-color: #e2cab0;
+}
+
+.button{
+  padding-top: 35%;
+}
+
+.header{
+  padding-top: 20%;
+}
+
+.recipeForm{
+  background-color: #B8A693;
+  border-radius: 10px;
+  margin-top: 20%;
+  padding: 10px;
+}
+
+.ingredientsDiv{
+  /*background-color: #DFC35D;*/
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+
+#create{
+
+
+}
+
+.createRecipeButtons{
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+#addIngredient{
+  margin: 10px;
+  margin-bottom: 10px;
+  background-color: #DFC35D;
+  color: black;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#deleteingredient{
+  margin: 10px;
+  padding: 5px;
+  background-color: #6D1842;
+  color: white;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  
+}
+
+#unit{
+  margin-left: 10px;
+}
+
+#create{
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #DFC35D;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+#discard{
+  padding: 10px 20px;
+  background-color: #6D1842;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+#homeButton{
+  margin-top: 10px;
+  padding: 10px 40%;
+  background-color: #DFC35D;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+.recipe{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #B8A693;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+}
+
+#recipeNameOpenRecipe{
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0);
+  color: white;
+}
+
+#recipeSettings{
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0);
+  color: rgb(14, 0, 92);
+}
+
+#recipeRating{
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0);
+  color: rgb(234, 255, 0);
+  border-style: solid;
+}
+
+label{
+  font-weight: bold;
+}
+
+#back{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6D1842;
+  border-style: solid;
+  border-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.recipeDetails{
+  background-color: #B8A693;
+  border-radius: 10px;
+  margin-top: 20%;
+  padding: 10px;
+  margin: 1%;
+}
+
+#save{
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #DFC35D;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+.recipeList{
+
+}

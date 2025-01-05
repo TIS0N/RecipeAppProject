@@ -14,7 +14,7 @@ const DeleteRecipe = require("../abl/category/deleteRecipe");
 router.get("/get", GetRecipe);
 router.get("/list", ListRecipe);
 router.post("/create", CreateRecipe);
-router.put("/update", UpdateRecipe);
+router.put("/update/:id", UpdateRecipe);
 router.delete("/delete", DeleteRecipe);
 
 // Export the router to use it in the main app file
